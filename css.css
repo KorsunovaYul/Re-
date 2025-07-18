@@ -569,9 +569,9 @@ body {
 
 .about-video {
     width: 100%;
-    height: 20vw; /* вместо 25vw который привязан к vh */
-    max-height: 350px; /* ограничение сверху */
-    min-height: 200px; /* ограничение снизу */
+    height: 35vw; /* вместо 25vw который привязан к vh */
+    max-height: 600px; /* ограничение сверху */
+    min-height: 300px; /* ограничение снизу */
     border-radius: 0.5rem;
     background: #FCFCFF;
     display: flex;
@@ -3261,4 +3261,12 @@ body {
         transform: none !important;
         z-index: 10 !important;
     }
-}
+
+	
+	
+	
+	
+	
+	
+	
+	
