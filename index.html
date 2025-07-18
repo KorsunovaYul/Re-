@@ -4,7 +4,217 @@
 	<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 	<title>Re:Крой</title>
-	<link rel="stylesheet" href="1css.css">
+	<link rel="stylesheet" href="css.css">
+	
+	<style>
+	/* ===== АНИМАЦИЯ ПУЛЬСАЦИИ СЕРДЕЧКА ===== */
+	.pulsing-heart {
+	    animation: heartbeat 2s ease-in-out infinite;
+	    transform-origin: center;
+	}
+	
+	@keyframes heartbeat {
+	    0% {
+	        transform: scale(1);
+	    }
+	    25% {
+	        transform: scale(1.1);
+	    }
+	    50% {
+	        transform: scale(1);
+	    }
+	    75% {
+	        transform: scale(1.05);
+	    }
+	    100% {
+	        transform: scale(1);
+	    }
+	}
+	
+	/* ===== АНИМАЦИЯ НОЖНИЦ ===== */
+	.scissors {
+	    transition: all 0.3s ease;
+	    cursor: pointer;
+	}
+	
+	.scissors:hover {
+	    transform: scale(1.1);
+	    animation: cuttingMotion 1.2s ease-in-out infinite;
+	}
+	
+	@keyframes cuttingMotion {
+	    0% { transform: scale(1.1) rotate(0deg); }
+	    25% { transform: scale(1.1) rotate(15deg); }
+	    50% { transform: scale(1.1) rotate(0deg); }
+	    75% { transform: scale(1.1) rotate(-15deg); }
+	    100% { transform: scale(1.1) rotate(0deg); }
+	}
+	
+	/* Анимация для ножниц в футере - тоже режущая */
+	.footer-scissors {
+	    transition: all 0.3s ease;
+	    cursor: pointer;
+	}
+	
+	.footer-scissors:hover {
+	    transform: scale(1.05);
+	    animation: cuttingMotionSmall 1s ease-in-out infinite;
+	}
+	
+	@keyframes cuttingMotionSmall {
+	    0% { transform: scale(1.05) rotate(0deg); }
+	    25% { transform: scale(1.05) rotate(12deg); }
+	    50% { transform: scale(1.05) rotate(0deg); }
+	    75% { transform: scale(1.05) rotate(-12deg); }
+	    100% { transform: scale(1.05) rotate(0deg); }
+	}
+	
+	/* ===== АНИМАЦИЯ ЛОГО ПРИЛОЖЕНИЯ ===== */
+	.final-logo {
+	    transition: all 0.4s ease;
+	    cursor: pointer;
+	}
+	
+	.final-logo:hover {
+	    transform: scale(1.08) rotate(2deg);
+	    box-shadow: 0 15px 30px rgba(113, 83, 223, 0.3);
+	    animation: logoPulse 1s ease-in-out;
+	}
+	
+	@keyframes logoPulse {
+	    0%, 100% { 
+	        transform: scale(1.08) rotate(2deg);
+	        box-shadow: 0 15px 30px rgba(113, 83, 223, 0.3);
+	    }
+	    50% { 
+	        transform: scale(1.12) rotate(-1deg);
+	        box-shadow: 0 20px 40px rgba(113, 83, 223, 0.4);
+	    }
+	}
+	
+	/* ===== HOVER ЭФФЕКТЫ ДЛЯ УЛУЧШЕНИЯ ===== */
+	.pulsing-heart:hover {
+	    animation-duration: 1s; /* Ускоряем пульсацию при наведении */
+	}
+	
+	.feature-card {
+	    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+	}
+	
+	.feature-card:hover {
+	    transform: translateY(-12px); /* Увеличено с -5px до -12px */
+	    box-shadow: 0 20px 40px rgba(113, 83, 223, 0.25); /* Увеличена тень */
+	}
+	
+	/* Особые эффекты для разных карточек */
+	.feature-card.purple:hover {
+	    box-shadow: 0 20px 40px rgba(113, 83, 223, 0.3);
+	}
+	
+	.feature-card.orange:hover {
+	    box-shadow: 0 20px 40px rgba(255, 163, 33, 0.3);
+	}
+	
+	.feature-card.blue:hover {
+	    box-shadow: 0 20px 40px rgba(113, 83, 223, 0.3);
+	}
+	
+	/* ===== МОДАЛЬНОЕ ОКНО УСПЕШНОЙ ОТПРАВКИ ===== */
+	.success-modal {
+	    position: fixed;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	    background: rgba(0, 0, 0, 0.5);
+	    display: none;
+	    justify-content: center;
+	    align-items: center;
+	    z-index: 10000;
+	    opacity: 0;
+	    transition: opacity 0.3s ease;
+	}
+	
+	.success-modal.show {
+	    display: flex;
+	    opacity: 1;
+	}
+	
+	.success-modal-content {
+	    background: #FCFCFF;
+	    border-radius: 1rem;
+	    padding: 40px;
+	    text-align: center;
+	    max-width: 400px;
+	    width: 90%;
+	    position: relative;
+	    transform: scale(0.7);
+	    transition: transform 0.3s ease;
+	}
+	
+	.success-modal.show .success-modal-content {
+	    transform: scale(1);
+	}
+	
+	.success-heart {
+	    width: 60px;
+	    height: 60px;
+	    margin: 0 auto 20px;
+	    animation: heartPop 0.8s ease-out;
+	}
+	
+	@keyframes heartPop {
+	    0% {
+	        transform: scale(0);
+	        opacity: 0;
+	    }
+	    50% {
+	        transform: scale(1.3);
+	    }
+	    100% {
+	        transform: scale(1);
+	        opacity: 1;
+	    }
+	}
+	
+	.success-title {
+	    font-family: 'Inter', sans-serif;
+	    font-size: 1.5rem;
+	    font-weight: 700;
+	    color: #7153DF;
+	    margin-bottom: 15px;
+	}
+	
+	.success-message {
+	    font-family: 'Inter', sans-serif;
+	    font-size: 1.1rem;
+	    color: #0D0139;
+	    margin-bottom: 25px;
+	    line-height: 1.4;
+	}
+	
+	.success-close-btn {
+	    background: #7153DF;
+	    color: white;
+	    border: none;
+	    border-radius: 0.5rem;
+	    padding: 12px 30px;
+	    font-family: 'Inter', sans-serif;
+	    font-size: 1rem;
+	    font-weight: 600;
+	    cursor: pointer;
+	    transition: all 0.3s ease;
+	}
+	
+	.success-close-btn:hover {
+	    color: #0D0139;
+	}
+	
+	.success-close-btn:active {
+	    background: #0D0139;
+	    color: white;
+	}
+	</style>
 	
 </head>
 
@@ -20,10 +230,10 @@
 	
 		<div class="container" style="padding-top: 5vw">
 			
-			<img src="Photo/serdechko.png" alt="сердечко">
+			<img src="Photo/serdechko.png" alt="сердечко" class="pulsing-heart">
 			<div class="text-block">
 				<p class="subtitle">Выкрай время, чтобы перекроить одежду</p>
-				<a href="#" class="btn">Скачать</a>
+				<a href="https://www.figma.com/design/ySAjKXqSKydiGh2rWWwOJJ/%D0%B2%D0%B5%D0%B1?node-id=152-2&t=EGUCEpMSBCBwG6Op-1" class="btn">Скачать</a>
 			</div>
 			<div style="clear: both;"></div>
 			
@@ -209,12 +419,12 @@
 
 			<div class="contact-content">
 				<div class="contact-form-wrapper">
-					<form class="contact-form">
+					<form class="contact-form" id="contactForm">
 						<div class="form-group">
-							<input type="text" class="form-input" placeholder="Имя / почта" required>
+							<input type="text" class="form-input" placeholder="Имя / почта" required id="nameEmail">
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-input" placeholder="Пожелание" required>
+							<input type="text" class="form-input" placeholder="Пожелание" required id="message">
 						</div>
 						<button type="submit" class="form-button">Отправить</button>
 					</form>
@@ -256,8 +466,8 @@
 						удобно и рядом с вами.
 					</p>
 					<div class="final-buttons">
-						<a href="#" class="download-btn download-btn--google">Скачать на GooglePlay</a>
-						<a href="#" class="download-btn download-btn--apple">Скачать на AppStore</a>
+						<a href="https://www.figma.com/design/ySAjKXqSKydiGh2rWWwOJJ/%D0%B2%D0%B5%D0%B1?node-id=152-2&t=EGUCEpMSBCBwG6Op-1" class="download-btn download-btn--google">Скачать на GooglePlay</a>
+						<a href="https://www.figma.com/design/ySAjKXqSKydiGh2rWWwOJJ/%D0%B2%D0%B5%D0%B1?node-id=152-2&t=EGUCEpMSBCBwG6Op-1" class="download-btn download-btn--apple">Скачать на AppStore</a>
 					</div>
 				</div>
 			</div>
@@ -272,175 +482,177 @@
 			<img src="Photo/nognizi.png" alt="ножницы" class="footer-scissors">
 		</footer>
 		
+		<!-- МОДАЛЬНОЕ ОКНО УСПЕШНОЙ ОТПРАВКИ -->
+		<div class="success-modal" id="successModal">
+			<div class="success-modal-content">
+				<img src="Photo/serdechko.png" alt="сердечко" class="success-heart">
+				<h3 class="success-title">Успешно отправлено!</h3>
+				<p class="success-message">Спасибо за ваше сообщение! Мы обязательно свяжемся с вами в ближайшее время.</p>
+				<button class="success-close-btn" onclick="closeSuccessModal()">Закрыть</button>
+			</div>
+		</div>
+		
 		
 		
 		
 	</main>
 	
 <script>
+// ДОБАВЛЯЕМ АНИМАЦИЮ ЛИНИЙ ПРИ СКРОЛЛЕ
+let linesAnimated = false; // Флаг чтобы анимация запустилась только один раз
+
+function checkLinesAnimation() {
+    if (linesAnimated) return; // Если уже анимировали, выходим
+    
+    const servicesList = document.querySelector('.services-list');
+    if (!servicesList) return;
+    
+    // Получаем позицию блока со списком услуг
+    const servicesTop = servicesList.offsetTop;
+    const servicesHeight = servicesList.offsetHeight;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const windowHeight = window.innerHeight;
+    
+    // Проверяем, виден ли блок услуг на экране (запускаем раньше для лучшего эффекта)
+    if (scrollTop + windowHeight >= servicesTop + 200) {
+        console.log('🎬 Запускаем анимацию линий!');
+        
+        // Добавляем класс для запуска анимации (исправлен класс согласно CSS)
+        servicesList.classList.add('animate');
+        
+        // Помечаем что анимация уже была
+        linesAnimated = true;
+    }
+}
+
+// ТВОЙ ОРИГИНАЛЬНЫЙ СКРИПТ ПОЛНОСТЬЮ
+window.addEventListener('scroll', function() {
+    const menuBox = document.querySelector('.menu-box');
+    const horizontalMenu = document.querySelector('.horizontal-menu');
+    const contentSection = document.querySelector('.content-section');
+    const screenWidth = window.innerWidth;
+
+    const contentTop = contentSection.offsetTop;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    // ДОБАВЛЯЕМ ПРОВЕРКУ АНИМАЦИИ ЛИНИЙ
+    checkLinesAnimation();
+
+    // ДОБАВЛЯЕМ ТОЛЬКО ОТЛАДКУ - НЕ МЕНЯЯ ЛОГИКУ
+    console.log('Ширина:', screenWidth, 'Скролл:', scrollTop, 'Триггер:', contentTop);
+
+    if (scrollTop >= contentTop - 100) {
+        if (screenWidth >= 1000) {
+            // Для экранов 835px и БОЛЬШЕ показываем СТАРОЕ ВЕРТИКАЛЬНОЕ меню
+            console.log('➡️ Должно показать ВЕРТИКАЛЬНОЕ меню');
+            menuBox.classList.add('show');
+        } else {
+            // Для экранов 834px и МЕНЬШЕ показываем НОВОЕ ГОРИЗОНТАЛЬНОЕ меню
+            console.log('➡️ Должно показать ГОРИЗОНТАЛЬНОЕ меню');
+            horizontalMenu.classList.add('show');
+        }
+    } else {
+        // При скролле вверх скрываем оба меню
+        menuBox.classList.remove('show');
+        horizontalMenu.classList.remove('show');
+    }
+
+    // ПРОВЕРЯЕМ CSS СВОЙСТВА
+    if (horizontalMenu) {
+        const display = getComputedStyle(horizontalMenu).display;
+        console.log('Горизонтальное меню display:', display);
+    }
+});
+
+// Дополнительно: обработчик изменения размера окна
+window.addEventListener('resize', function() {
+    const menuBox = document.querySelector('.menu-box');
+    const horizontalMenu = document.querySelector('.horizontal-menu');
+    const screenWidth = window.innerWidth;
+
+    console.log('🔄 RESIZE на ширину:', screenWidth);
+
+    // Сбрасываем состояние меню при изменении размера
+    if (screenWidth >= 835) {
+        horizontalMenu.classList.remove('show');
+    } else {
+        menuBox.classList.remove('show');
+    }
+});
+
+// ВАШ ОРИГИНАЛЬНЫЙ КОД ДЛЯ ОТЗЫВОВ - НЕ ТРОГАЕМ
+document.addEventListener('DOMContentLoaded', function() {
+    const reviewItems = document.querySelectorAll('.reviews-item');
+
+    reviewItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            document.querySelectorAll('.review-text').forEach(text => {
+                text.classList.remove('active');
+            });
+
+            const reviewId = this.getAttribute('data-review');
+            const reviewText = document.getElementById(`review-${reviewId}`);
+            if (reviewText) {
+                reviewText.classList.add('active');
+            }
+        });
+
+        item.addEventListener('mouseleave', function() {
+            document.querySelectorAll('.review-text').forEach(text => {
+                text.classList.remove('active');
+            });
+        });
+    });
+    
+    // ПРОВЕРЯЕМ АНИМАЦИЮ СРАЗУ ПРИ ЗАГРУЗКЕ (если пользователь уже проскроллил)
+    checkLinesAnimation();
+});
+
+// ===== ОБРАБОТКА ФОРМЫ И МОДАЛЬНОГО ОКНА =====
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Предотвращаем стандартную отправку формы
+    
+    // Получаем значения полей
+    const nameEmail = document.getElementById('nameEmail').value;
+    const message = document.getElementById('message').value;
+    
+    // Простая проверка заполненности
+    if (nameEmail.trim() && message.trim()) {
+        // Показываем модальное окно
+        showSuccessModal();
+        
+        // Очищаем форму
+        document.getElementById('contactForm').reset();
+        
+        console.log('📧 Форма отправлена:', { nameEmail, message });
+    } else {
+        alert('Пожалуйста, заполните все поля!');
+    }
+});
+
+function showSuccessModal() {
+    const modal = document.getElementById('successModal');
+    modal.classList.add('show');
+    
+    // Блокируем скролл страницы
+    document.body.style.overflow = 'hidden';
+}
+
+function closeSuccessModal() {
+    const modal = document.getElementById('successModal');
+    modal.classList.remove('show');
+    
+    // Возвращаем скролл страницы
+    document.body.style.overflow = 'auto';
+}
+
+// Закрытие модалки при клике вне её
+document.getElementById('successModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeSuccessModal();
+    }
+});
+</script>
 
-					
-
-		
-
-					window.addEventListener('scroll', function() {
-
-				const menuBox = document.querySelector('.menu-box');
-
-				const horizontalMenu = document.querySelector('.horizontal-menu');
-
-				const contentSection = document.querySelector('.content-section');
-
-				const screenWidth = window.innerWidth;
-
-
-
-				const contentTop = contentSection.offsetTop;
-
-				const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-
-
-				// ДОБАВЛЯЕМ ТОЛЬКО ОТЛАДКУ - НЕ МЕНЯЯ ЛОГИКУ
-
-				console.log('Ширина:', screenWidth, 'Скролл:', scrollTop, 'Триггер:', contentTop);
-
-
-
-				if (scrollTop >= contentTop - 100) {
-
-					if (screenWidth >= 1000) {
-
-						// Для экранов 835px и БОЛЬШЕ показываем СТАРОЕ ВЕРТИКАЛЬНОЕ меню
-
-						console.log('➡️ Должно показать ВЕРТИКАЛЬНОЕ меню');
-
-						menuBox.classList.add('show');
-
-					} else {
-
-						// Для экранов 834px и МЕНЬШЕ показываем НОВОЕ ГОРИЗОНТАЛЬНОЕ меню
-
-						console.log('➡️ Должно показать ГОРИЗОНТАЛЬНОЕ меню');
-
-						horizontalMenu.classList.add('show');
-
-					}
-
-				} else {
-
-					// При скролле вверх скрываем оба меню
-
-					menuBox.classList.remove('show');
-
-					horizontalMenu.classList.remove('show');
-
-				}
-
-
-
-				// ПРОВЕРЯЕМ CSS СВОЙСТВА
-
-				if (horizontalMenu) {
-
-					const display = getComputedStyle(horizontalMenu).display;
-
-					console.log('Горизонтальное меню display:', display);
-
-				}
-
-			});
-
-
-
-			// Дополнительно: обработчик изменения размера окна
-
-			window.addEventListener('resize', function() {
-
-				const menuBox = document.querySelector('.menu-box');
-
-				const horizontalMenu = document.querySelector('.horizontal-menu');
-
-				const screenWidth = window.innerWidth;
-
-
-
-				console.log('🔄 RESIZE на ширину:', screenWidth);
-
-
-
-				// Сбрасываем состояние меню при изменении размера
-
-				if (screenWidth >= 835) {
-
-					horizontalMenu.classList.remove('show');
-
-				} else {
-
-					menuBox.classList.remove('show');
-
-				}
-
-			});
-
-
-
-			// ВАШ ОРИГИНАЛЬНЫЙ КОД ДЛЯ ОТЗЫВОВ - НЕ ТРОГАЕМ
-
-			document.addEventListener('DOMContentLoaded', function() {
-
-				const reviewItems = document.querySelectorAll('.reviews-item');
-
-
-
-				reviewItems.forEach(item => {
-
-					item.addEventListener('mouseenter', function() {
-
-						document.querySelectorAll('.review-text').forEach(text => {
-
-							text.classList.remove('active');
-
-						});
-
-
-
-						const reviewId = this.getAttribute('data-review');
-
-						const reviewText = document.getElementById(`review-${reviewId}`);
-
-						if (reviewText) {
-
-							reviewText.classList.add('active');
-
-						}
-
-					});
-
-
-
-					item.addEventListener('mouseleave', function() {
-
-						document.querySelectorAll('.review-text').forEach(text => {
-
-							text.classList.remove('active');
-
-						});
-
-					});
-
-				});
-
-			});
-
-		</script>
-
-	
-	
-	
-	
-	
-	
-	
 </body>
 </html>
